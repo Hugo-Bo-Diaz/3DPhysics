@@ -43,6 +43,7 @@ update_status ModuleSceneIntro::Update()
 	Plane* plano = new Plane(0,1,0,0);
 	plano->axis = true;
 	plano->Render();
+
 	// TODO 6: Draw a sphere of 0.5f radius around the center
 	// Draw somewhere else a cube and a cylinder in wireframe
 	Sphere* sfere = new Sphere(0.5f);
@@ -56,7 +57,7 @@ update_status ModuleSceneIntro::Update()
 
 	Cube* fair_and_square = new Cube(5.0f, 10.0f, 3.0f);
 	fair_and_square->SetPos(-5.0f,0.0f,0.0f);
-	cilinder->SetRotation(90.0f, vec3(0, 1, 0));
+	fair_and_square->SetRotation(90.0f, vec3(0, 1, 0));
 	fair_and_square->Render();
 
 	return UPDATE_CONTINUE;

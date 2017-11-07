@@ -82,14 +82,15 @@ update_status ModuleCamera3D::Update()
 	// Mouse motion ----------------
 	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
-		int dx = -App->input->GetMouseXMotion();
-		int dy = -App->input->GetMouseYMotion();
-		LOG("%d",dx)
+		//int dx = -App->input->GetMouseXMotion();
+		//int dy = -App->input->GetMouseYMotion();
+		int dx = -App->input->GetMouseX() + SCREEN_WIDTH/2;
+		int dy = -App->input->GetMouseY() + SCREEN_HEIGHT/2;
 		angle -= dx * 3.14/180;
 		angle_y += dy* 3.14 / 180;
-		App->input->set_to_center = true;
 		App->camera->Look(Position, vec3(Position.x + cos(angle), Position.y+sin(angle_y), Position.z + sin(angle)),true);
 
+		SDL_WarpMouseInWindow(App->window->window,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
 		// TODO (Homework): Rotate the camera with the mouse
 	}
 
