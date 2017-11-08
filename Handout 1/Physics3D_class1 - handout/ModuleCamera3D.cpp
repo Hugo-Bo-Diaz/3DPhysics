@@ -80,6 +80,10 @@ update_status ModuleCamera3D::Update()
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		App->camera->Move(X);
 	// Mouse motion ----------------
+	if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	{
+		SDL_WarpMouseInWindow(App->window->window, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	}
 	if(App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_REPEAT)
 	{
 		//int dx = -App->input->GetMouseXMotion();
@@ -87,9 +91,18 @@ update_status ModuleCamera3D::Update()
 		int dx = -App->input->GetMouseX() + SCREEN_WIDTH/2;
 		int dy = -App->input->GetMouseY() + SCREEN_HEIGHT/2;
 		angle -= dx * 3.14/180;
+		if (angle > 2*3.14)
+		{
+			angle -= 2 * 3.14;
+		}
+		if (angle < 0)
+		{
+			angle += 2 * 3.14;
+		}
 		angle_y += dy* 3.14 / 180;
+		
 		App->camera->Look(Position, vec3(Position.x + cos(angle), Position.y+sin(angle_y), Position.z + sin(angle)),true);
-
+		LOG("%f %f",angle,angle_y);
 		SDL_WarpMouseInWindow(App->window->window,SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
 		// TODO (Homework): Rotate the camera with the mouse
 	}
